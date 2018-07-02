@@ -1,5 +1,9 @@
 package org.nix.utils.http;
 
+import org.nix.utils.json.JacksonUtil;
+
+import java.io.IOException;
+
 /**
  * @author zhangpei
  * @version 1.0
@@ -10,8 +14,22 @@ public abstract class AbstractSystemTest extends AbstractAnnotationInterfaceRequ
     @Override
     public HttpResponse sendHttpRequest(String url, Object parameter) {
         HttpResponse response = null;
-        response = AbstractHttpClient.sendHttpRequest(url, parameter, response);
+        response = sendHttpRequest(url, parameter, response);
         handleResponse(response);
+        return response;
+    }
+
+    protected HttpResponse sendHttpRequest(String url, Object parameter, HttpResponse response) {
+        if (parameter instanceof String){
+            response = HttpUtil.doPostJson(url,parameter.toString());
+        }else{
+            try {
+                String json = JacksonUtil.bean2Json(parameter);
+                response = HttpUtil.doPostJson(url,json);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return response;
     }
 
@@ -21,7 +39,7 @@ public abstract class AbstractSystemTest extends AbstractAnnotationInterfaceRequ
      * @param sonUrl 子路径
      * @param json   请求json字符串
      */
-    protected void httpRequest(String sonUrl, String json) {
+    protected void httpRequest(String sonUrl, Object json) {
         ((AbstractSystemTest)proxy.getProxyInstance()).sendHttpRequest(getBaseUrl() + sonUrl, json);
     }
 

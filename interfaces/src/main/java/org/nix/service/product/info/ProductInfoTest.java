@@ -14,13 +14,14 @@ import java.util.List;
 
 /**
  * 测试案例方法
- * 默认客户端请求为json格式，发送请求也是json格式
- * 如果需要自定义客户端，请覆盖createWebClient()方法，自行实现
- * 或者重新设置客户点接受信息格式内容
+ * 如果需要自定义客户端，
+ * AbstractSystemTest.sendHttpRequest(String url, Object parameter, HttpResponse response)方法，
+ * 在方法中重新定义请求方式即可
  * <p>
  * 构造方法的使用由使用者自己选择，具体内容
- * BASE_URL = "http://localhost:8080/services/student/findStudentByStudentNumber/11503090207";
  *
+ * 对于使用 @Test 注解能够让方法得到执行，如果需要代理请自己调用代理对象进行处理。
+ * 该类中只实现了对请求方法的代理，因为测试方法主要需要的是对请求进行处理。
  * @author zhangpei
  * @version 1.0
  * @date 2018/7/1
@@ -51,17 +52,14 @@ public class ProductInfoTest extends AbstractSystemTest {
     @Test
     public void queryProductInfo() throws IOException {
         String son = "QueryProductInfo";
-        queryProductInfoRun(son,getQueryProductInfoParameter());
+        httpRequest(son, JacksonUtil.bean2Json(getQueryProductInfoParameter()));
     }
 
-    public void queryProductInfoRun(String url ,Object parameter) throws IOException {
-        httpRequest(url, JacksonUtil.bean2Json(parameter));
-    }
 
     /**
      * 4.2	秒杀单品状态查询
      */
-
+    @Test
     public String querySingleProductInfo() {
         return "秒杀单品状态查询";
     }
