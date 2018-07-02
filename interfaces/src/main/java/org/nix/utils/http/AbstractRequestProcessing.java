@@ -1,7 +1,5 @@
 package org.nix.utils.http;
 
-import org.nix.proxy.InterfaceRequestProcessingProxy;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -15,27 +13,15 @@ import java.util.List;
  */
 public abstract class AbstractRequestProcessing implements RequestProcessing {
 
-    /**
-     * 设置代理类
-     */
-    protected AbstractProxyFactory proxy;
+
 
     /**
      * 使用默认代理类
      */
     public AbstractRequestProcessing() {
         super();
-        proxy = new InterfaceRequestProcessingProxy(this);
     }
 
-    /**
-     * 用户自定义代理类
-     * @param proxy 代理类
-     */
-    public AbstractRequestProcessing(AbstractProxyFactory proxy) {
-        super();
-        this.proxy = proxy;
-    }
 
     /**
      * 执行测试请求方法

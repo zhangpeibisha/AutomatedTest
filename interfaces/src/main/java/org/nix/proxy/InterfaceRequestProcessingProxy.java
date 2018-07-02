@@ -3,6 +3,7 @@ package org.nix.proxy;
 import org.nix.utils.http.AbstractProxyFactory;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 
 /**
  * 对接口测试的代理类
@@ -27,12 +28,15 @@ public class InterfaceRequestProcessingProxy extends AbstractProxyFactory {
     public void preHandler(Method method ,Object[] args) {
         runTime = System.currentTimeMillis();
         System.out.println("=======================================");
-        System.out.println("方法执行开始时间:" + runTime + "/s");
+        System.out.println("方法执行开始时间:" + runTime + "/ms");
         System.out.println("执行方法名字 === > "+ target.getClass() + "." + method.getName());
         System.out.println("入参 === >");
         System.out.println("[");
-        for (Object o : args) {
-            System.out.println(o.toString());
+
+        int parameterCount = args.length;
+        Parameter[] argsName = method.getParameters();
+        for (int i = 0; i < parameterCount; i++) {
+            System.out.println(argsName[i] + ":" + args[i]);
         }
         System.out.println("]");
     }
@@ -40,8 +44,8 @@ public class InterfaceRequestProcessingProxy extends AbstractProxyFactory {
     @Override
     public void postHandler(Object args) {
         long tempTime = System.currentTimeMillis();
-        System.out.println("方法执行结束时间:" + tempTime + "/s");
-        System.out.println("方法执行耗时:"+(tempTime-runTime) + "/s");
+        System.out.println("方法执行结束时间:" + tempTime + "/ms");
+        System.out.println("方法执行耗时:"+(tempTime-runTime) + "/ms");
         System.out.println("出参 === >");
         System.out.println("[" + args + "]");
         System.out.println("=======================================");

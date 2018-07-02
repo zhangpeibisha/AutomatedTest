@@ -41,25 +41,6 @@ public abstract class AbstractInterfaceRequestProcessing extends AbstractRequest
     }
 
     /**
-     * 使用默认 Test 后缀定义测试方法
-     * 但使用自己的自定义的代理类
-     */
-    public AbstractInterfaceRequestProcessing(AbstractProxyFactory proxy) {
-        super(proxy);
-    }
-
-    /**
-     * 运行方法后缀和代理类由子类自定义
-     *
-     * @param proxy         代理类
-     * @param requestSuffix 需要运行方法的后缀
-     */
-    public AbstractInterfaceRequestProcessing(AbstractProxyFactory proxy, String requestSuffix) {
-        super(proxy);
-        this.requestSuffix = requestSuffix;
-    }
-
-    /**
      * 寻找到要执行的方法
      *
      * @return 需要执行方法集合

@@ -21,10 +21,6 @@ public abstract class AbstractAnnotationInterfaceRequestProcessing extends Abstr
         super();
     }
 
-    public AbstractAnnotationInterfaceRequestProcessing(AbstractProxyFactory proxy) {
-        super(proxy);
-    }
-
     /**
      * 设置允许方法逻辑
      *

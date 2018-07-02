@@ -1,5 +1,6 @@
 package org.nix.utils.http;
 
+import org.nix.proxy.InterfaceRequestProcessingProxy;
 import org.nix.utils.json.JacksonUtil;
 
 import java.io.IOException;
@@ -10,6 +11,21 @@ import java.io.IOException;
  * @date 2018/7/2
  */
 public abstract class AbstractSystemTest extends AbstractAnnotationInterfaceRequestProcessing implements HttpClient{
+
+    /**
+     * 设置代理类
+     */
+    protected AbstractProxyFactory proxy;
+
+    public AbstractSystemTest() {
+        super();
+        proxy = new InterfaceRequestProcessingProxy(this);
+    }
+
+    public AbstractSystemTest(AbstractProxyFactory proxy) {
+        super();
+        this.proxy = proxy;
+    }
 
     @Override
     public HttpResponse sendHttpRequest(String url, Object parameter) {
