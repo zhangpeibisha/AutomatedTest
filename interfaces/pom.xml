@@ -50,6 +50,15 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.5</version>
         </dependency>
+
+        <!--将测试报告生成html模板-->
+        <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.28</version>
+        </dependency>
+
     </dependencies>
 
     <build>

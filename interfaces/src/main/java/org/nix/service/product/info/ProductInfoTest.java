@@ -44,29 +44,24 @@ public class ProductInfoTest extends AbstractSystemTest {
         }
     }
 
-    /**
-     * 自定义请求
-     *
-     * @param sonUrl 子路径
-     * @param json   请求json字符串
-     */
-    private void httpRequest(String sonUrl, String json) {
-        sendHttpRequest(BASE_URL + sonUrl, json);
-    }
 
     /**
      * 4.3	秒杀品库存查询
      */
-    @Test(weights = 4)
+    @Test
     public void queryProductInfo() throws IOException {
         String son = "QueryProductInfo";
-        httpRequest(son, JacksonUtil.bean2Json(getQueryProductInfoParameter()));
+        queryProductInfoRun(son,getQueryProductInfoParameter());
+    }
+
+    public void queryProductInfoRun(String url ,Object parameter) throws IOException {
+        httpRequest(url, JacksonUtil.bean2Json(parameter));
     }
 
     /**
      * 4.2	秒杀单品状态查询
      */
-    @Test(weights = 5)
+
     public String querySingleProductInfo() {
         return "秒杀单品状态查询";
     }
@@ -111,5 +106,10 @@ public class ProductInfoTest extends AbstractSystemTest {
     @Override
     public void handleResponse(HttpResponse response) {
         System.out.println(response);
+    }
+
+    @Override
+    protected String getBaseUrl() {
+        return BASE_URL;
     }
 }

@@ -20,7 +20,8 @@ public interface HttpClient {
      * 发送http请求
      * @param url 请求路径
      * @param parameter 请求参数
+     * @return 请求结果
      */
-    void sendHttpRequest(String url, Object parameter);
+    HttpResponse sendHttpRequest(String url, Object parameter);
 
 }

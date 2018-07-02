@@ -47,11 +47,8 @@ public abstract class AbstractRequestProcessing implements RequestProcessing {
      */
     @Override
     public void sendRequest() throws InvocationTargetException, IllegalAccessException {
-        // 设置代理类
-        AbstractRequestProcessing proxyObject =
-                (AbstractRequestProcessing) proxy.getProxyInstance();
         for (Method method : findRunMethod()) {
-           method.invoke(proxyObject);
+           method.invoke(this);
         }
     }
 

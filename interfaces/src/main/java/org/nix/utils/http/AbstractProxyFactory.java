@@ -35,7 +35,7 @@ public abstract class AbstractProxyFactory {
         en.setCallback(new MethodInterceptor(){
         @Override
         public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-            preHandler(args);
+            preHandler(method,args);
             //执行目标对象的方法
             Object returnValue = method.invoke(target, args);
             postHandler(returnValue);
@@ -49,8 +49,9 @@ public abstract class AbstractProxyFactory {
     /**
      * 代理方法前置执行方法
      * @param args 入参
+     * @param method 执行方法
      */
-    public abstract void preHandler(Object[] args);
+    public abstract void preHandler(Method method ,Object[] args);
 
     /**
      * 代理方法后置执行

@@ -12,10 +12,11 @@ import java.io.IOException;
 public abstract class AbstractHttpClient implements HttpClient {
 
     @Override
-    public void sendHttpRequest(String url, Object parameter) {
+    public HttpResponse sendHttpRequest(String url, Object parameter) {
         HttpResponse response = null;
         response = sendHttpRequest(url, parameter, response);
         handleResponse(response);
+        return response;
     }
 
     static HttpResponse sendHttpRequest(String url, Object parameter, HttpResponse response) {
