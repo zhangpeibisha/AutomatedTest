@@ -1,20 +1,22 @@
-package org.nix.service.product.result;
-
-import org.nix.service.vo.ProductInfo;
-
-import java.util.List;
+package org.nix.service.product.parmateter;
 
 /**
- * 4.3	秒杀品库存查询结果
+ * 4.1	秒杀数据查询参数
  * @author zhangpei
  * @version 1.0
- * @date 2018/7/1
+ * @date 2018/7/3
  */
-public class QueryProductInfoResult {
+public class QueryRegionProductInfo {
 
     private String channelId;
-    private List<ProductInfo> productInfos;
+    private long transTime;
     private String transactionId;
+
+    public QueryRegionProductInfo(String channelId, long transTime, String transactionId) {
+        this.channelId = channelId;
+        this.transTime = transTime;
+        this.transactionId = transactionId;
+    }
 
     public String getChannelId() {
         return channelId;
@@ -24,12 +26,12 @@ public class QueryProductInfoResult {
         this.channelId = channelId;
     }
 
-    public List<ProductInfo> getProductInfos() {
-        return productInfos;
+    public long getTransTime() {
+        return transTime;
     }
 
-    public void setProductInfos(List<ProductInfo> productInfos) {
-        this.productInfos = productInfos;
+    public void setTransTime(long transTime) {
+        this.transTime = transTime;
     }
 
     public String getTransactionId() {
@@ -42,9 +44,9 @@ public class QueryProductInfoResult {
 
     @Override
     public String toString() {
-        return "QueryProductInfoResult{" +
+        return "QueryRegionProductInfo{" +
                 "channelId='" + channelId + '\'' +
-                ", productInfos=" + productInfos +
+                ", transTime='" + transTime + '\'' +
                 ", transactionId='" + transactionId + '\'' +
                 '}';
     }

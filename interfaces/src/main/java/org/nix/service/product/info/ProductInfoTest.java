@@ -1,6 +1,7 @@
 package org.nix.service.product.info;
 
 import org.nix.service.product.parmateter.QueryProductInfoParameter;
+import org.nix.service.product.parmateter.QueryRegionProductInfo;
 import org.nix.service.product.parmateter.QuerySingleProductInfoParameter;
 import org.nix.utils.http.AbstractSystemTest;
 import org.nix.utils.http.HttpResponse;
@@ -19,9 +20,10 @@ import java.util.List;
  * 在方法中重新定义请求方式即可
  * <p>
  * 构造方法的使用由使用者自己选择，具体内容
- *
+ * <p>
  * 对于使用 @Test 注解能够让方法得到执行，如果需要代理请自己调用代理对象进行处理。
  * 该类中只实现了对请求方法的代理，因为测试方法主要需要的是对请求进行处理。
+ *
  * @author zhangpei
  * @version 1.0
  * @date 2018/7/1
@@ -47,7 +49,7 @@ public class ProductInfoTest extends AbstractSystemTest {
 
 
     /**
-     * 4.3	秒杀品库存查询
+     * 4.3	秒杀品库存查询 正常访问
      */
     @Test
     public void queryProductInfo() throws IOException {
@@ -55,14 +57,26 @@ public class ProductInfoTest extends AbstractSystemTest {
         httpRequest(son, JacksonUtil.bean2Json(getQueryProductInfoParameter()));
     }
 
-
     /**
-     * 4.2	秒杀单品状态查询
+     * 4.2	秒杀单品状态查询 正常访问
      */
     @Test
-    public String querySingleProductInfo() {
-        return "秒杀单品状态查询";
+    public void querySingleProductInfo() throws IOException {
+        String son = "QuerySingleProductInfo";
+        httpRequest(son, JacksonUtil.bean2Json(getQuerySingleProductInfoParmaeter()));
     }
+
+    /**
+     * 4.1	秒杀数据查询 正常访问
+     *
+     * @throws IOException
+     */
+    @Test
+    public void queryRegionProductInfo() throws IOException {
+        String son = "QueryRegionProductInfo";
+        httpRequest(son, JacksonUtil.bean2Json(getQueryRegionProductInfo()));
+    }
+
 
     /**
      * 设置秒杀品库存查询
@@ -87,13 +101,21 @@ public class ProductInfoTest extends AbstractSystemTest {
 
         String channelId = "210002";
         String productId = "10002";
-        String transTime = "10003";
+        long timestamp = 1525762709000L;
         String transactionId = "725396974136597435435";
 
         QuerySingleProductInfoParameter parmaeter =
-                new QuerySingleProductInfoParameter(channelId, productId, transTime, transactionId);
+                new QuerySingleProductInfoParameter(channelId, productId, timestamp, transactionId);
 
         return parmaeter;
+    }
+
+    private QueryRegionProductInfo getQueryRegionProductInfo() {
+        String channelId = "210002";
+        long timestamp = 1525762709000L;
+        String transactionId = "725396974136597435435";
+        QueryRegionProductInfo info = new QueryRegionProductInfo(channelId, timestamp, transactionId);
+        return info;
     }
 
     /**

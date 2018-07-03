@@ -9,10 +9,10 @@ public class QuerySingleProductInfoParameter {
 
     private String channelId;
     private String productId;
-    private String transTime;
+    private long transTime;
     private String transactionId;
 
-    public QuerySingleProductInfoParameter(String channelId, String productId, String transTime, String transactionId) {
+    public QuerySingleProductInfoParameter(String channelId, String productId, long transTime, String transactionId) {
         this.channelId = channelId;
         this.productId = productId;
         this.transTime = transTime;
@@ -35,11 +35,11 @@ public class QuerySingleProductInfoParameter {
         this.productId = productId;
     }
 
-    public String getTransTime() {
+    public long getTransTime() {
         return transTime;
     }
 
-    public void setTransTime(String transTime) {
+    public void setTransTime(long transTime) {
         this.transTime = transTime;
     }
 
