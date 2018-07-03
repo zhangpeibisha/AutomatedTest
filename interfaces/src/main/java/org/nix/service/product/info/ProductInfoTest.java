@@ -3,7 +3,7 @@ package org.nix.service.product.info;
 import org.nix.service.product.parmateter.QueryProductInfoParameter;
 import org.nix.service.product.parmateter.QueryRegionProductInfo;
 import org.nix.service.product.parmateter.QuerySingleProductInfoParameter;
-import org.nix.utils.http.AbstractSystemTest;
+import org.nix.utils.http.AbstractSystemCXFTest;
 import org.nix.utils.http.HttpResponse;
 import org.nix.utils.http.Test;
 import org.nix.utils.http.WebClientUtil;
@@ -29,7 +29,7 @@ import java.util.List;
  * @date 2018/7/1
  * @see org.nix.utils.http.AbstractInterfaceRequestProcessing
  */
-public class ProductInfoTest extends AbstractSystemTest {
+public class ProductInfoTest extends AbstractSystemCXFTest {
 
     public static String secret_key = "c5fkK157lBsy91uC";
 
