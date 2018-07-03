@@ -1,9 +1,14 @@
 package org.nix.proxy;
 
+import org.nix.dao.LogDao;
+import org.nix.po.LogPo;
+import org.nix.po.ParametersPo;
 import org.nix.utils.http.AbstractProxyFactory;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.sql.Date;
+import java.sql.SQLException;
 
 /**
  * 对接口测试的代理类
@@ -19,6 +24,11 @@ public class InterfaceRequestProcessingProxy extends AbstractProxyFactory {
 
     private long runTime;
 
+    /**
+     * 日志记录类
+     */
+    private LogPo logPo = new LogPo();
+
     public InterfaceRequestProcessingProxy(Object target) {
         super(target);
         this.target = target;
@@ -33,9 +43,17 @@ public class InterfaceRequestProcessingProxy extends AbstractProxyFactory {
         System.out.println("入参 === >");
         System.out.println("[");
 
+        // 日志添加开始事件和方法名字
+        logPo.setStartTime(new Date(runTime));
+        logPo.setMethodName(target.getClass() + "." + method.getName());
+
         int parameterCount = args.length;
         Parameter[] argsName = method.getParameters();
         for (int i = 0; i < parameterCount; i++) {
+            // 加入方法参数
+            ParametersPo parametersPo = new ParametersPo(argsName[i].getName(),args[i]);
+            logPo.addParameter(parametersPo);
+
             System.out.println(argsName[i] + ":" + args[i]);
         }
 
@@ -50,7 +68,20 @@ public class InterfaceRequestProcessingProxy extends AbstractProxyFactory {
         System.out.println("出参 === >");
         System.out.println("[" + args + "]");
         System.out.println("=======================================");
+
+        logPo.setEndTime(new Date(tempTime));
+        logPo.setUseTime(tempTime-runTime);
+        logPo.setResult(args.toString());
+        saveLog();
     }
 
+    private void saveLog(){
+        LogDao logDao = new LogDao();
+        try {
+            logDao.insertCompleteLog(logPo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

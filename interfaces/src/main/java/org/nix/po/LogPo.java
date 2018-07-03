@@ -15,7 +15,7 @@ public class LogPo {
 
     private String result;
 
-    private int useTime;
+    private long useTime;
 
     private Date startTime;
 
@@ -24,6 +24,9 @@ public class LogPo {
     private Date creteTime;
 
     private List<ParametersPo> parametersPos;
+
+    public LogPo() {
+    }
 
     public LogPo(String methodName, String result, int useTime, Date startTime, Date endTime) {
         this.methodName = methodName;
@@ -49,11 +52,11 @@ public class LogPo {
         this.result = result;
     }
 
-    public int getUseTime() {
+    public long getUseTime() {
         return useTime;
     }
 
-    public void setUseTime(int useTime) {
+    public void setUseTime(long useTime) {
         this.useTime = useTime;
     }
 

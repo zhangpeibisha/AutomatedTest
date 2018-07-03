@@ -38,7 +38,7 @@ public class LogDao {
             }
             statement.setDate(3,logPo.getStartTime());
             statement.setDate(4,logPo.getEndTime());
-            statement.setInt(5,logPo.getUseTime());
+            statement.setLong(5,logPo.getUseTime());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             return getGeneratedKeys(resultSet);
