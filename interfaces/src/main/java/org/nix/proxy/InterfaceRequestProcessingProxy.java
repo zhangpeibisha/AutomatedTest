@@ -38,6 +38,7 @@ public class InterfaceRequestProcessingProxy extends AbstractProxyFactory {
         for (int i = 0; i < parameterCount; i++) {
             System.out.println(argsName[i] + ":" + args[i]);
         }
+
         System.out.println("]");
     }
 

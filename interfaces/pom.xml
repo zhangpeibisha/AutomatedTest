@@ -59,6 +59,17 @@
             <version>2.3.28</version>
         </dependency>
 
+        <!--数据库操作-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.46</version>
+        </dependency>
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+        </dependency>
     </dependencies>
 
     <build>
