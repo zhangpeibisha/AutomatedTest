@@ -6,10 +6,10 @@ import org.nix.service.product.parmateter.QuerySingleProductInfoParameter;
 import org.nix.utils.http.AbstractSystemTest;
 import org.nix.utils.http.HttpResponse;
 import org.nix.utils.http.Test;
+import org.nix.utils.http.WebClientUtil;
 import org.nix.utils.json.JacksonUtil;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,13 +38,22 @@ public class ProductInfoTest extends AbstractSystemTest {
 
     public static void main(String[] args) {
         ProductInfoTest test = new ProductInfoTest();
+//        try {
+//            test.sendRequest();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
+
+        Object result = null;
         try {
-            test.sendRequest();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+            result = WebClientUtil.postJson(BASE_URL + "QueryProductInfo",
+                 test.getQueryProductInfoParameter());
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(result);
     }
 
 

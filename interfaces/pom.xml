@@ -50,6 +50,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.5</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-jaxrs -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>1.9.13</version>
+        </dependency>
 
         <!--将测试报告生成html模板-->
         <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
@@ -70,6 +76,15 @@
             <artifactId>c3p0</artifactId>
             <version>0.9.1.2</version>
         </dependency>
+
+        <!--cxf-->
+        <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-bundle-jaxrs -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-bundle-jaxrs</artifactId>
+            <version>2.7.18</version>
+        </dependency>
+
     </dependencies>
 
     <build>
